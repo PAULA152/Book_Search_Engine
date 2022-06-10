@@ -39,7 +39,7 @@ const resolvers = {
         );
         return book;
       }
-      throw new AuthenticationError("Could not update book");
+      throw new AuthenticationError("Unable to update book");
     },
     removeBook: async (parent, { bookId }, context) => {
       if (context.user) {
@@ -50,7 +50,7 @@ const resolvers = {
         );
         return book;
       }
-      throw new AuthenticationError("Could not delete book");
+      throw new AuthenticationError("Unable to delete book");
     },
   },
 };
