@@ -1,4 +1,4 @@
-const { gql } = require('apollo-server-express')
+const {gql} = require('apollo-server-express')
 const typeDefs = gql`
 type User{
     _id: ID!
@@ -18,7 +18,6 @@ type Book{
 type Auth{
     token: ID!
     user: User
-
 }
 input BookInput{
     bookId: ID!
@@ -37,5 +36,4 @@ type Mutation{
     saveBook(bookData: BookInput!): User
     removeBook(bookId: ID!): User
 }
-
 `

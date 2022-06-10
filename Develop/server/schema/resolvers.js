@@ -9,7 +9,7 @@ const resolvers = {
         const userData = await User.findOne({ _id: context.user._id });
         return userData;
       }
-      throw new AuthenticationError("User not found.");
+      throw new AuthenticationError("User does not exist");
     },
   },
   Mutation: {
@@ -21,11 +21,11 @@ const resolvers = {
     login: async (parent, { email, password }) => {
       const loginInfo = await User.findOne({ email });
       if (!loginInfo) {
-        throw new AuthenticationError("Cannot find user to log in.");
+        throw new AuthenticationError("User does not exist.");
       }
       const checkPassword = await loginInfo.isCorrectPassword(password);
       if (!checkPassword) {
-        throw new AuthenticationError("Incorrect password.");
+        throw new AuthenticationError("Password incorrect.");
       }
       const token = SignToken(loginInfo);
       return { token, user };
@@ -39,7 +39,7 @@ const resolvers = {
         );
         return book;
       }
-      throw new AuthenticationError("Unable to update book");
+      throw new AuthenticationError("Could not update book");
     },
     removeBook: async (parent, { bookId }, context) => {
       if (context.user) {
@@ -50,7 +50,7 @@ const resolvers = {
         );
         return book;
       }
-      throw new AuthenticationError("Unable to delete book");
+      throw new AuthenticationError("Could not delete book");
     },
   },
 };
